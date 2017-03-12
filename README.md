@@ -23,35 +23,84 @@ Let's provide the some code firstly, as shown below.
             Console.WriteLine("show...");
         }
 
-        public virtual void ShowOne()
+        public virtual void Print()
         {
-            Console.WriteLine("show one...");
+            Console.WriteLine("print...");
         }
     }
     
+In a specific scenario, we want to log all the function calls before invoking and after invoking.
+What should we do?
 
+Let's see...
+
+We want to add additional responsibilities to Foo's functions. Maybe we can use *Decorator Pattern*.
+
+Let's have a try, the code is shown below.
+
+    public class Stupid : Foo
+    {
+        Foo foo;
+
+        public Stupid(Foo foo)
+        {
+            this.foo = foo;
+        }
+
+        public new void Show()
+        {
+            foo.Show();
+        }
+
+        public override void ShowOne()
+        {
+            foo.ShowOne();
+        }
+    }
+    
+Class *Stupid* is derived from class *Foo*, the diagram is shown below.
+
+![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20decorator.png "Decorator")
+
+    Foo foo = new Foo();
+
+    Stupid stupid = new Stupid(foo);
+    stupid.Show();
+    stupid.Print();
+    
+Looks great!
+
+A well-architected should strive for loosely coupled designs between object that intercact. So we usually coding like this.
+
+    Foo foo = new Foo();
+
+    Foo stupid = new Stupid(foo);
+    stupid.Show();
+    stupid.Print();
+    
+And the result is beyond our expectations, because function *Show* is a concrete method, not a *hook*(a method given an empty or default implementation).
 
 ###How to use?
 
 ####1. *EInterceptor*, provides the basic functionalities for *aspect-oriented programming*.
   e.g.
     
-      EInterceptor interceptor = new EInterceptor(typeof(Foo));
+        EInterceptor interceptor = new EInterceptor(typeof(Foo));
 
-      var fooBase = (Foo)interceptor.Create();
-      fooBase.ShowOne();
+        var fooBase = (Foo)interceptor.Create();
+        fooBase.Print();
 
-      var fooInterface = (IShow)interceptor.CreateProxy();
-      fooInterface.Show();
+        var fooInterface = (IShow)interceptor.CreateProxy();
+        fooInterface.Show();
     
 ####2. *EInterceptorFactory*
   e.g.
   
-      var fooBaseCreatedByFactory = EInterceptorFactory.Create<Foo, Foo>();
-      fooBaseCreatedByFactory.ShowOne();
+        var fooBaseCreatedByFactory = EInterceptorFactory.Create<Foo, Foo>();
+        fooBaseCreatedByFactory.Print();
 
-      var fooInterfaceCreatedByFactory = EInterceptorFactory.Create<Foo, IShow>();
-      fooInterfaceCreatedByFactory.Show();
+        var fooInterfaceCreatedByFactory = EInterceptorFactory.Create<Foo, IShow>();
+        fooInterfaceCreatedByFactory.Show();
       
   
       
