@@ -70,7 +70,7 @@ Class *Stupid* is derived from class *Foo*, the diagram is shown below.
     
 Looks great!
 
-A well-architected should strive for loosely coupled designs between object that intercact. So we usually coding like this.
+A well-architected should strive for loosely coupled designs between object that intercact[1]. So we usually coding like this.
 
     Foo foo = new Foo();
 
@@ -78,7 +78,16 @@ A well-architected should strive for loosely coupled designs between object that
     stupid.Show();
     stupid.Print();
     
+or:
+
+    IShow stupid = new Stupid(foo);
+    stupid.Show();
+    
 And the result is beyond our expectations, because function *Show* is a concrete method, not a *hook*(a method given an empty or default implementation).
+
+A well-architected also should follow these principles.
+1. Program to interface, not implementation.[1]
+2. Depend on abstractions. Dot depend on concrete class.[1]
 
 ###How to use?
 
@@ -102,5 +111,5 @@ And the result is beyond our expectations, because function *Show* is a concrete
         var fooInterfaceCreatedByFactory = EInterceptorFactory.Create<Foo, IShow>();
         fooInterfaceCreatedByFactory.Show();
       
-  
-      
+#Reference
+[1] Head First Design Pattern
