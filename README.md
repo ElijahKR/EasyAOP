@@ -86,8 +86,17 @@ or:
 And the result is beyond our expectations, because function *Show* is a concrete method, not a *hook*(a method given an empty or default implementation).
 
 A well-architected also should follow these principles.
-1. Program to interface, not implementation.[1]
-2. Depend on abstractions. Dot depend on concrete class.[1]
+
+1.  Program to interface, not implementation.[1]
+2.  Depend on abstractions. Dot depend on concrete class.[1]
+
+So previous way is not the best practice, and what changes should we do for this design furter?
+
+We can handle the virtual methods and concrete methods implemented separately.
+
+####Virtual methods
+
+####Concrete methods implemented from interfaces
 
 ###How to use?
 
