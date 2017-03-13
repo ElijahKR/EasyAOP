@@ -94,9 +94,66 @@ So previous way is not the best practice, and what changes should we do for this
 
 We can handle the virtual methods and concrete methods implemented separately.
 
-####Virtual methods
+####*Virtual methods*
 
-####Concrete methods implemented from interfaces
+For virtual methods, we can derived from the its base class to implement *AOP*.
+
+e.g.
+
+    Foo stupid = new Stupid();
+    stupid.Print();
+    
+    public class Stupid : Foo
+    {
+        public override void Print()
+        {
+            Console.WriteLine("before printing...");
+            base.Print();
+            Console.WriteLine("after printing...");
+        }
+    }
+    
+The diagram is shown below.
+
+![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20inheritance.png "Inheritance")
+
+**Finally**, we combine these two into one compound pattern, as shown below.
+
+![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20compound.png "Compound")
+
+And this what we want, it's perfect.
+
+####*Concrete implementation methods*
+
+For concrete implementation methods, we can use proxy that implements the same interface to relize *AOP*.
+
+e.g.
+
+    Foo foo = new Foo();
+
+    IShow proxy = new Proxy(foo);
+    proxy.Show();
+    
+    public class Proxy : IShow
+    {
+        IShow foo = null;
+
+        public Proxy(IShow foo)
+        {
+            this.foo = foo;
+        }
+
+        public void Show()
+        {
+            Console.WriteLine("before showing...");
+            foo.Show();
+            Console.WriteLine("after showing...");
+        }
+    }
+    
+The diagram is shown below.
+
+![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20proxy.png "Proxy")
 
 ###How to use?
 
