@@ -157,7 +157,7 @@ The diagram is shown below.
 
 ![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20compound.png "Compound")
 
-And this what we want, it's perfect.
+This is what we want, it's perfect. And this is **EasyAOP**'s design idea.
 
 ###How to use?
 
@@ -166,20 +166,22 @@ And this what we want, it's perfect.
     
         EInterceptor interceptor = new EInterceptor(typeof(Foo));
 
-        var fooBase = (Foo)interceptor.Create();
+        Foo fooBase = (Foo)interceptor.Create();
         fooBase.Print();
 
-        var fooInterface = (IShow)interceptor.CreateProxy();
+        IShow fooInterface = (IShow)interceptor.CreateProxy();
         fooInterface.Show();
     
-####2. *EInterceptorFactory*
+####2. *EInterceptorFactory*, provides the unified interface to crate interceptors. And it will retrun the specific object according to the generic return type.
   e.g.
   
-        var fooBaseCreatedByFactory = EInterceptorFactory.Create<Foo, Foo>();
+        Foo fooBaseCreatedByFactory = EInterceptorFactory.Create<Foo, Foo>();
         fooBaseCreatedByFactory.Print();
 
-        var fooInterfaceCreatedByFactory = EInterceptorFactory.Create<Foo, IShow>();
+        IShow fooInterfaceCreatedByFactory = EInterceptorFactory.Create<Foo, IShow>();
         fooInterfaceCreatedByFactory.Show();
+        
+####Checkpoint, always follow the **Object-Oriented** principles.
       
 #Reference
 [1] Head First Design Pattern
