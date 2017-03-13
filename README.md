@@ -200,7 +200,7 @@ And then, use following two ways to write your own code.
         IShow fooInterface = (IShow)interceptor.CreateProxy();
         fooInterface.Show();
     
-####2. *EInterceptorFactory*, provides the unified interface to crate interceptors. And it will retrun the specific object according to the generic return type.
+####2. *EInterceptorFactory*(preffered), provides the unified interface to create interceptors. And it will retrun the specific object according to the generic return type.
   e.g.
   
         Foo fooBaseCreatedByFactory = EInterceptorFactory.Create<Foo, Foo>();
@@ -208,6 +208,26 @@ And then, use following two ways to write your own code.
 
         IShow fooInterfaceCreatedByFactory = EInterceptorFactory.Create<Foo, IShow>();
         fooInterfaceCreatedByFactory.Show();
+        
+Following is the overloads of method *Create*.
+
+        /// <summary>
+        /// create object with interceptor
+        /// </summary>
+        /// <typeparam name="T">the retrun type</typeparam>
+        /// <param name="typeTarget">target type that will be intecepted</param>
+        /// <returns></returns>
+        public static T Create<T>(Type typeTarget = null){ }
+        
+        /// <summary>
+        /// create object with interceptor
+        /// </summary>
+        /// <typeparam name="T">target type that will be intecepted</typeparam>
+        /// <typeparam name="R">the retrun type</typeparam>
+        /// <returns></returns>
+        public static R Create<T, R>()
+        
+*EInterceptorFactory* will cache the interceptors that ever been created, but it's not thread safe, please note.
         
 ####Checkpoint, always follow the **Object-Oriented** principles.
       
