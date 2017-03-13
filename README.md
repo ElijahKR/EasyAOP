@@ -3,7 +3,7 @@
 **EasyAOP**  is a common-component provides a easy way for *aspect-oriented programming (AOP)* in **C#**.
 
 ###What is *AOP*?
-*AOP* is a programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns...
+*AOP* is a programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns[2].
 
 For more details, please see from [wiki](https://en.wikipedia.org/wiki/Aspect-oriented_programming).
 
@@ -301,6 +301,15 @@ How to use our customize aspect? The code is shown below.
 It's very easy to customize your own logic.
       
 #Reference
-[1] Head First Design Pattern
+[1] Head First Design Pattern, Eric Freeman, Elisabeth Robson, Bert Bates,Kathy Sierra.
 
-If you have any question, please contact Email-Elijah_K@163.com.
+[2] https://en.wikipedia.org/wiki/Aspect-oriented_programming
+
+[3] https://msdn.microsoft.com/en-us/library/hh156524(v=vs.110).aspx
+
+[4] https://msdn.microsoft.com/en-us/library/650ax5cx(v=vs.110).aspx
+
+
+>
+>If you have any question, please contact Elijah_K@163.com.
+>
