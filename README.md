@@ -161,6 +161,34 @@ This is what we want, it's perfect. And this is **EasyAOP**'s design idea.
 
 ###How to use?
 
+First, add the attributes **EAtttributeAspect** to the methods that need to intercept.
+
+e.g.
+
+    public class Foo : IShow
+    {
+        [EAtttributeAspect(typeof(EAspectLogging), EEnumJoinpoints.Before | EEnumJoinpoints.After)]
+        public void Show()
+        {
+            Console.WriteLine("show...");
+        }
+
+        [EAtttributeAspect(typeof(EAspectLogging), EEnumJoinpoints.Before)]
+        public virtual void Print()
+        {
+            Console.WriteLine("print...");
+        }
+    }
+    
+Following is the properties of **EAtttributeAspect**
+
+    public Type AspectType { get; set; }            // specify the type of concrete aspect
+    public EEnumJoinpoints Joinpoint { get; set; }  // join points
+    public bool IsAsync { get; set; }               // if true, the method invoke will be executed asynchronously
+    public object Data { get; set; }                // data transmission
+
+And then, use following two ways to write your own code.
+
 ####1. *EInterceptor*, provides the basic functionalities for *aspect-oriented programming*.
   e.g.
     
