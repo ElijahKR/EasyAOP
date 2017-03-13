@@ -230,6 +230,77 @@ Following is the overloads of method *Create*.
 *EInterceptorFactory* will cache the interceptors that ever been created, but it's not thread safe, please note.
         
 ####Checkpoint, always follow the **Object-Oriented** principles.
+
+###How to debug?
+
+Because *proxy* is created dynamicly, so it hard to debug while error occurs.
+But we can use *IEInterceptor.GetSourceCode()* and *EInterceptorFactory.GetSourceCode(Type typeTarget)* to generate the source code, it's very intuitive and convient to debug. 
+
+ e.g.
+ 
+        EInterceptor interceptor = new EInterceptor(typeof(Foo));
+
+        string source = AppDomain.CurrentDomain.BaseDirectory + "code.cs";
+        using (StreamWriter sw = new StreamWriter(source, false))
+        {
+            sw.Write(interceptor.GetSourceCode());
+        }
+        
+Generate the source code, and append to your project to debug.
+
+###How to customize your own aspect?
+
+To relize this, you should implement the interface *IEAspect*.
+
+e.g.
+
+    public class EAspectAuthentication : IEAspect
+    {
+        public virtual void Invoke(object obj, EEventArgs arg)
+        {
+            IEAttributeAspect attrAspect = (IEAttributeAspect)obj;
+            User data = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(attrAspect.Data.ToString());
+
+            if (data != null && data.UserName.Equals("Elijah") && data.Password.Equals("EasyAOP"))
+            {
+                Console.WriteLine("success to authenticate...");
+            }
+            else
+            {
+                Console.WriteLine("user name or password does not match...");
+            }
+        }
+    }
+
+    public class User
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+    
+How to use our customize aspect? The code is shown below.
+
+    IShow fooInterfaceCreatedByFactory = EInterceptorFactory.Create<Foo, IShow>();
+    fooInterfaceCreatedByFactory.Show();
+                
+    public class Foo : IShow
+    {
+        [EAtttributeAspect(typeof(EAspectAuthentication), 
+            Data = "{\"UserName\":\"Elijah\",\"Password\":\"EasyAOP\"}")]
+        public void Show()
+        {
+            Console.WriteLine("show...");
+        }
+
+        public virtual void Print()
+        {
+            Console.WriteLine("print...");
+        }
+    }
+    
+It's very easy to customize your own logic.
       
 #Reference
 [1] Head First Design Pattern
+
+If you have any question, please contact Email-Elijah_K@163.com.
