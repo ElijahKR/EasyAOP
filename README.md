@@ -49,12 +49,16 @@ Let's have a try, the code is shown below.
 
         public new void Show()
         {
+            Console.WriteLine("before showing...");
             foo.Show();
+            Console.WriteLine("after showing...");
         }
 
-        public override void ShowOne()
+        public override void Print()
         {
-            foo.ShowOne();
+            Console.WriteLine("before printing...");
+            foo.Print();
+            Console.WriteLine("after printing...");
         }
     }
     
@@ -90,7 +94,7 @@ A well-architected also should follow these principles.
 1.  Program to interface, not implementation.[1]
 2.  Depend on abstractions. Dot depend on concrete class.[1]
 
-So previous way is not the best practice, and what changes should we do for this design furter?
+So previous way is not the best practice, and what should we do to optimize this design further?
 
 We can handle the virtual methods and concrete methods implemented separately.
 
@@ -116,12 +120,6 @@ e.g.
 The diagram is shown below.
 
 ![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20inheritance.png "Inheritance")
-
-**Finally**, we combine these two into one compound pattern, as shown below.
-
-![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20compound.png "Compound")
-
-And this what we want, it's perfect.
 
 ####*Concrete implementation methods*
 
@@ -154,6 +152,12 @@ e.g.
 The diagram is shown below.
 
 ![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20proxy.png "Proxy")
+
+**Finally**, we combine these two into one compound pattern, as shown below.
+
+![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20compound.png "Compound")
+
+And this what we want, it's perfect.
 
 ###How to use?
 
