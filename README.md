@@ -225,7 +225,7 @@ Following is the overloads of method *Create*.
         /// <typeparam name="T">target type that will be intecepted</typeparam>
         /// <typeparam name="R">the retrun type</typeparam>
         /// <returns></returns>
-        public static R Create<T, R>()
+        public static R Create<T, R>(){ }
         
 *EInterceptorFactory* will cache the interceptors that ever been created, but it's not thread safe, please note.
         
