@@ -309,7 +309,8 @@ It's very easy to customize your own logic.
 
 [4] https://msdn.microsoft.com/en-us/library/650ax5cx(v=vs.110).aspx
 
+[5] http://blogs.msmvps.com/ricardoperes/2016/10/23/interception-in-net-part-4-an-interception-framework/?utm_source=tuicool&utm_medium=referral
 
->
->If you have any question, please contact Elijah_K@163.com.
->
+<br />
+
+If you have any question, please contact Elijah_K@163.com.
