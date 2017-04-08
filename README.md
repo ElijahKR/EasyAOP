@@ -2,12 +2,12 @@
 
 **EasyAOP**  is a common-component provides a easy way for *aspect-oriented programming (AOP)* in **C#**.
 
-###What is *AOP*?
+### What is *AOP*?
 *AOP* is a programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns[2].
 
 For more details, please see from [wiki](https://en.wikipedia.org/wiki/Aspect-oriented_programming).
 
-###How to implement?
+### How to implement?
 
 Let's provide the some code firstly, as shown below.
 
@@ -98,7 +98,7 @@ So previous way is not the best practice, and what should we do to optimize this
 
 We can handle the virtual methods and concrete methods implemented separately.
 
-####*Virtual methods*
+#### *Virtual methods*
 
 For virtual methods, we can derived from the its base class to implement *AOP*.
 
@@ -121,7 +121,7 @@ The diagram is shown below.
 
 ![Alt text](https://github.com/ElijahKR/EasyAOP/blob/master/imgs/diagram%20inheritance.png "Inheritance")
 
-####*Concrete implementation methods*
+#### *Concrete implementation methods*
 
 For concrete implementation methods, we can use proxy that implements the same interface to relize *AOP*.
 
@@ -159,7 +159,7 @@ The diagram is shown below.
 
 This is what we want, it's perfect. And this is **EasyAOP**'s design idea.
 
-###How to use?
+### How to use?
 
 First, add the attributes **EAtttributeAspect** to the methods that need to intercept.
 
@@ -189,7 +189,7 @@ Following is the properties of **EAtttributeAspect**
 
 And then, use following two ways to write your own code.
 
-####1. *EInterceptor*, provides the basic functionalities for *aspect-oriented programming*.
+#### 1. *EInterceptor*, provides the basic functionalities for *aspect-oriented programming*.
   e.g.
     
         EInterceptor interceptor = new EInterceptor(typeof(Foo));
@@ -200,7 +200,7 @@ And then, use following two ways to write your own code.
         IShow fooInterface = (IShow)interceptor.CreateProxy();
         fooInterface.Show();
     
-####2. *EInterceptorFactory*(preffered), provides the unified interface to create interceptors. And it will retrun the specific object according to the generic return type.
+#### 2. *EInterceptorFactory*(preffered), provides the unified interface to create interceptors. And it will retrun the specific object according to the generic return type.
   e.g.
   
         Foo fooBaseCreatedByFactory = EInterceptorFactory.Create<Foo, Foo>();
@@ -229,9 +229,9 @@ Following is the overloads of method *Create*.
         
 *EInterceptorFactory* will cache the interceptors that ever been created, but it's not thread safe, please note.
         
-####Checkpoint, always follow the **Object-Oriented** principles.
+#### Checkpoint, always follow the **Object-Oriented** principles.
 
-###How to debug?
+### How to debug?
 
 Because *proxy* is created dynamicly, so it hard to debug while error occurs.
 But we can use *IEInterceptor.GetSourceCode()* and *EInterceptorFactory.GetSourceCode(Type typeTarget)* to generate the source code, it's very intuitive and convient to debug. 
@@ -248,7 +248,7 @@ But we can use *IEInterceptor.GetSourceCode()* and *EInterceptorFactory.GetSourc
         
 Generate the source code, and append to your project to debug.
 
-###How to customize your own aspect?
+### How to customize your own aspect?
 
 To relize this, you should implement the interface *IEAspect*.
 
@@ -300,7 +300,8 @@ How to use our customize aspect? The code is shown below.
     
 It's very easy to customize your own logic.
       
-#Reference
+# Reference
+
 [1] Head First Design Pattern, Eric Freeman, Elisabeth Robson, Bert Bates,Kathy Sierra.
 
 [2] https://en.wikipedia.org/wiki/Aspect-oriented_programming
